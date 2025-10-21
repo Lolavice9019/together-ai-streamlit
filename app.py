@@ -10,27 +10,49 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better styling
+# Custom CSS for dark theme
 st.markdown("""
     <style>
     .main {
         padding: 2rem;
+        background-color: #0f172a;
     }
     .stTextArea textarea {
         font-size: 16px;
+        background-color: #1e293b !important;
+        color: #f1f5f9 !important;
+        border-color: #334155 !important;
     }
     .response-box {
-        background-color: #f0f2f6;
+        background-color: #1e293b;
         padding: 1.5rem;
         border-radius: 0.5rem;
         margin-top: 1rem;
+        border: 1px solid #334155;
+        color: #f1f5f9;
     }
     .error-box {
-        background-color: #ffebee;
+        background-color: #7f1d1d;
         padding: 1rem;
         border-radius: 0.5rem;
-        border-left: 4px solid #f44336;
+        border-left: 4px solid #dc2626;
         margin-top: 1rem;
+        color: #fecaca;
+    }
+    .stButton>button {
+        background: linear-gradient(90deg, #8b5cf6 0%, #6366f1 100%);
+        color: white;
+        border: none;
+        font-weight: 600;
+    }
+    .stButton>button:hover {
+        background: linear-gradient(90deg, #7c3aed 0%, #4f46e5 100%);
+    }
+    h1, h2, h3 {
+        color: #f1f5f9 !important;
+    }
+    .stSelectbox label, .stTextArea label {
+        color: #cbd5e1 !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -45,84 +67,58 @@ TEMPLATES = [
     {"value": "You are a code expert who helps debug, optimize, and explain programming concepts.", "label": "Code Expert"},
 ]
 
-# Models - comprehensive list from Together AI
+# Models - Only verified working serverless models from Together AI
 MODELS = [
-    {"value": "meta-llama/Llama-Guard-3-11B-Vision-Turbo", "label": "Llama Guard 4 12B"},
+    {"value": "moonshotai/Kimi-K2-Instruct-0905", "label": "Kimi K2 Instruct 0905"},
+    {"value": "deepseek-ai/DeepSeek-V3.1", "label": "DeepSeek V3.1"},
+    {"value": "openai/gpt-oss-120b", "label": "OpenAI GPT-OSS 120B"},
     {"value": "openai/gpt-oss-20b", "label": "OpenAI GPT-OSS 20B"},
-    {"value": "moonshot/kimi-k2-instruct-0905", "label": "Kimi K2‑Instruct 0905"},
-    {"value": "Qwen/Qwen3-Next-80B-A3b-Instruct", "label": "Qwen3 Next 80B A3b Instruct"},
-    {"value": "Qwen/Qwen3-Next-80B-A3b-Thinking", "label": "Qwen3 Next 80B A3b Thinking"},
-    {"value": "Qwen/Qwen3-235B-A22B-Thinking-2507-FP8", "label": "Qwen3 235B A22B Thinking 2507 FP8"},
-    {"value": "Qwen/Qwen3-Coder-480B-A35B-Instruct-Fp8", "label": "Qwen3 Coder 480B A35B Instruct Fp8"},
-    {"value": "deepseek-ai/DeepSeek-R1-0528", "label": "DeepSeek R1‑0528"},
-    {"value": "moonshot/kimi-k2-instruct", "label": "Kimi K2 Instruct"},
-    {"value": "deepseek-ai/DeepSeek-V3-0324", "label": "DeepSeek V3‑0324"},
-    {"value": "Qwen/Qwen3-235B-A22B-Instruct-2507-FP8-Throughput", "label": "Qwen3 235B A22B Instruct 2507 FP8 Throughput"},
-    {"value": "meta-llama/Llama-4-Maverick-Instruct-17Bx128E", "label": "Llama 4 Maverick Instruct (17Bx128E)"},
-    {"value": "google/gemma-3n-e4b-instruct", "label": "Gemma 3N E4B Instruct"},
-    {"value": "meta-llama/Meta-Llama-3.3-70B-Instruct-Turbo", "label": "Meta Llama 3.3 70B Instruct Turbo"},
-    {"value": "zhipu/glm-4.5-air-fp8", "label": "Glm 4.5 Air Fp8"},
-    {"value": "meta-llama/Meta-Llama-3.3-70B-Instruct-Turbo-Free", "label": "Meta Llama 3.3 70B Instruct Turbo Free"},
-    {"value": "mistralai/Mixtral-8x7B-Instruct-v0.1", "label": "Mixtral‑8x7B Instruct v0.1"},
-    {"value": "mistralai/Mistral-7B-Instruct-v0.1", "label": "Mistral (7B) Instruct v0.1"},
-    {"value": "Qwen/Qwen2.5-VL-72B-Instruct", "label": "Qwen2.5‑VL (72B) Instruct"},
-    {"value": "meta-llama/Llama-4-Scout-Instruct-17Bx16E", "label": "Llama 4 Scout Instruct (17Bx16E)"},
-    {"value": "marin/marin-8b-instruct", "label": "Marin 8B Instruct"},
-    {"value": "intfloat/multilingual-e5-large-instruct", "label": "Multilingual E5 Large Instruct"},
-    {"value": "deepseek-ai/DeepSeek-R1-0528-Throughput", "label": "DeepSeek R1 0528 Throughput"},
-    {"value": "answerdotai/gte-modernbert-base", "label": "Gte Modernbert Base"},
-    {"value": "refuel-ai/Refuel-LLM-V2-Small", "label": "Refuel LLM V2 Small"},
-    {"value": "refuel-ai/Refuel-LLM-V2", "label": "Refuel LLM V2"},
-    {"value": "mistralai/Mistral-Small-24B-Instruct-25.01", "label": "Mistral Small (24B) Instruct 25.01"},
-    {"value": "Qwen/QwQ-32B", "label": "Qwen QwQ‑32B"},
+    {"value": "moonshotai/Kimi-K2-Instruct", "label": "Kimi K2 Instruct"},
+    {"value": "zai-org/GLM-4.5-Air-FP8", "label": "GLM 4.5 Air"},
+    {"value": "Qwen/Qwen3-235B-A22B-Thinking-2507", "label": "Qwen3 235B Thinking"},
+    {"value": "Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8", "label": "Qwen3 Coder 480B"},
+    {"value": "Qwen/Qwen3-235B-A22B-Instruct-2507-tput", "label": "Qwen3 235B Instruct"},
+    {"value": "Qwen/Qwen3-Next-80B-A3B-Instruct", "label": "Qwen3 Next 80B Instruct"},
+    {"value": "Qwen/Qwen3-Next-80B-A3B-Thinking", "label": "Qwen3 Next 80B Thinking"},
+    {"value": "deepseek-ai/DeepSeek-R1", "label": "DeepSeek R1"},
+    {"value": "deepseek-ai/DeepSeek-R1-0528-tput", "label": "DeepSeek R1 Throughput"},
+    {"value": "deepseek-ai/DeepSeek-V3", "label": "DeepSeek V3"},
+    {"value": "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8", "label": "Llama 4 Maverick"},
+    {"value": "meta-llama/Llama-4-Scout-17B-16E-Instruct", "label": "Llama 4 Scout"},
+    {"value": "meta-llama/Llama-3.3-70B-Instruct-Turbo", "label": "Llama 3.3 70B Turbo"},
+    {"value": "deepcogito/cogito-v2-preview-llama-70B", "label": "Cogito v2 Preview 70B"},
+    {"value": "deepcogito/cogito-v2-preview-llama-109B-MoE", "label": "Cogito v2 Preview 109B MoE"},
+    {"value": "deepcogito/cogito-v2-preview-llama-405B", "label": "Cogito v2 Preview 405B"},
+    {"value": "deepcogito/cogito-v2-preview-deepseek-671b", "label": "Cogito v2 Preview 671B"},
+    {"value": "mistralai/Magistral-Small-2506", "label": "Magistral Small 2506"},
     {"value": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B", "label": "DeepSeek R1 Distill Llama 70B"},
     {"value": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B", "label": "DeepSeek R1 Distill Qwen 14B"},
-    {"value": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-Free", "label": "DeepSeek R1 Distill Llama 70B Free"},
-    {"value": "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo", "label": "Meta Llama 3.1 405B Instruct Turbo"},
-    {"value": "Qwen/Qwen3-235B-A22B-FP8-Throughput", "label": "Qwen3 235B A22B FP8 Throughput"},
-    {"value": "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo", "label": "Meta Llama 3.1 70B Instruct Turbo"},
-    {"value": "Qwen/Qwen2.5-72B-Instruct-Turbo", "label": "Qwen2.5 72B Instruct Turbo"},
-    {"value": "Qwen/Qwen2.5-7B-Instruct-Turbo", "label": "Qwen2.5 7B Instruct Turbo"},
-    {"value": "meta-llama/Meta-Llama-3.2-3B-Instruct-Turbo", "label": "Meta Llama 3.2 3B Instruct Turbo"},
-    {"value": "meta-llama/Meta-Llama-Guard-3-11B-Vision-Turbo", "label": "Meta Llama Guard 3 11B Vision Turbo"},
-    {"value": "salesforce/llama-rank-v1-8b", "label": "Salesforce Llama Rank V1 (8B)"},
-    {"value": "meta-llama/Meta-Llama-Guard-3-8B", "label": "Meta Llama Guard 3 8B"},
-    {"value": "meta-llama/Meta-Llama-3-70B-Instruct-Turbo", "label": "Meta Llama 3 70B Instruct Turbo"},
-    {"value": "meta-llama/Meta-Llama-3-8B-Instruct-Lite", "label": "Meta Llama 3 8B Instruct Lite"},
-    {"value": "meta-llama/Meta-Llama-3-70B-Instruct-Reference", "label": "Meta Llama 3 70B Instruct Reference"},
-    {"value": "mistralai/Mistral-7B-Instruct-v0.3", "label": "Mistral (7B) Instruct v0.3"},
-    {"value": "meta-llama/Meta-Llama-Guard-2-8B", "label": "Meta Llama Guard 2 8B"},
-    {"value": "meta-llama/Llama-2-70b-hf", "label": "LLaMA‑2 (70B)"},
-    {"value": "arcee-ai/arcee-virtuoso-large", "label": "Arcee AI Virtuoso‑Large"},
-    {"value": "arcee-ai/arcee-coder-large", "label": "Arcee AI Coder‑Large"},
-    {"value": "arcee-ai/arcee-maestro", "label": "Arcee AI Maestro"},
-    {"value": "scb10x/typhoon-2.1-12b", "label": "Typhoon 2.1 12B"},
-    {"value": "mixedbread-ai/mxbai-rerank-large-v2", "label": "Mxbai Rerank Large V2"},
-    {"value": "openai/whisper-large-v3", "label": "Whisper large‑v3"},
-    {"value": "virtueguard/virtueguard-text-lite", "label": "Virtueguard Text Lite"},
-    {"value": "deepcogito/cogito-v2-preview-deepseek-671b-moe", "label": "Cogito V2 Preview Deepseek 671B MoE"},
-    {"value": "deepcogito/cogito-v2-preview-llama-109b-moe", "label": "Cogito V2 Preview Llama 109B MoE"},
-    {"value": "arize-ai/Qwen2-1.5B-Instruct", "label": "Arize AI Qwen 2 1.5B Instruct"},
-    {"value": "jinaai/m2-bert-retrieval-32k", "label": "M2‑BERT‑Retrieval‑32k"},
-    {"value": "deepcogito/cogito-v2-preview-llama-70b", "label": "Deepcogito Cogito V2 Preview Llama 70B"},
-    {"value": "deepcogito/cogito-v2-preview-llama-405b", "label": "Deepcogito Cogito V2 Preview Llama 405B"},
-    {"value": "arcee-ai/arcee-afm-4.5b", "label": "Arcee AI AFM 4.5B"},
-    {"value": "Qwen/Qwen2.5-Coder-32B-Instruct", "label": "Qwen 2.5 Coder 32B Instruct"},
-    {"value": "openai/gpt-oss-120b", "label": "OpenAI GPT‑OSS 120B"},
-    {"value": "jinaai/m2-bert-retrieval-2k", "label": "M2‑BERT‑Retrieval‑2K"},
-    {"value": "jinaai/m2-bert-retrieval-8k", "label": "M2‑BERT‑Retrieval‑8k"},
-    {"value": "whiterabbitneo/uae-large-v1", "label": "UAE‑Large‑V1"},
-    {"value": "meta-llama/Llama-Guard-7b", "label": "Llama Guard (7B)"},
-    {"value": "codellama/CodeLlama-34b-Instruct-hf", "label": "Code Llama Instruct (34B)"},
-    {"value": "BAAI/bge-large-en-v1.5", "label": "BAAI‑Bge‑Large‑1.5"},
-    {"value": "nvidia/Nemotron-Nano-9B-v2", "label": "Nvidia Nemotron Nano 9B V2"},
-    {"value": "apriel/apriel-1.5-15b-thinker", "label": "Apriel 1.5 15B Thinker"},
-    {"value": "deepseek-ai/DeepSeek-V3.1", "label": "Deepseek V3.1"},
-    {"value": "meta-llama/Llama-2-13b-chat-hf", "label": "LLaMA‑2 Chat (13B)"},
-    {"value": "deepseek-ai/deepseek-llm-67b-chat", "label": "DeepSeek LLM Chat (67B)"},
-    {"value": "meta-llama/Meta-Llama-3-70B-Instruct-Lite", "label": "Meta Llama 3 70B Instruct Lite"},
-    {"value": "upstage/SOLAR-10.7B-Instruct-v1.0", "label": "Upstage SOLAR Instruct v1 (11B)"},
-    {"value": "BAAI/bge-base-en-v1.5", "label": "BAAI‑Bge‑Base‑1.5"},
+    {"value": "marin-community/marin-8b-instruct", "label": "Marin 8B Instruct"},
+    {"value": "mistralai/Mistral-Small-24B-Instruct-2501", "label": "Mistral Small 24B"},
+    {"value": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo", "label": "Llama 3.1 8B Turbo"},
+    {"value": "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free", "label": "Llama 3.3 70B Turbo (Free)"},
+    {"value": "Qwen/Qwen2.5-7B-Instruct-Turbo", "label": "Qwen 2.5 7B Turbo"},
+    {"value": "Qwen/Qwen2.5-72B-Instruct-Turbo", "label": "Qwen 2.5 72B Turbo"},
+    {"value": "Qwen/Qwen2.5-VL-72B-Instruct", "label": "Qwen 2.5 VL 72B"},
+    {"value": "Qwen/Qwen2.5-Coder-32B-Instruct", "label": "Qwen 2.5 Coder 32B"},
+    {"value": "Qwen/QwQ-32B", "label": "QwQ 32B"},
+    {"value": "Qwen/Qwen3-235B-A22B-fp8-tput", "label": "Qwen3 235B Throughput"},
+    {"value": "arcee-ai/virtuoso-medium-v2", "label": "Arcee Virtuoso Medium"},
+    {"value": "arcee-ai/coder-large", "label": "Arcee Coder Large"},
+    {"value": "arcee-ai/virtuoso-large", "label": "Arcee Virtuoso Large"},
+    {"value": "arcee-ai/maestro-reasoning", "label": "Arcee Maestro"},
+    {"value": "arcee-ai/caller", "label": "Arcee Caller"},
+    {"value": "arcee-ai/arcee-blitz", "label": "Arcee Blitz"},
+    {"value": "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo", "label": "Llama 3.1 405B Turbo"},
+    {"value": "meta-llama/Llama-3.2-3B-Instruct-Turbo", "label": "Llama 3.2 3B Turbo"},
+    {"value": "meta-llama/Meta-Llama-3-8B-Instruct-Lite", "label": "Llama 3 8B Lite"},
+    {"value": "meta-llama/Llama-3-70b-chat-hf", "label": "Llama 3 70B Reference"},
+    {"value": "google/gemma-2b-it", "label": "Gemma 2B Instruct"},
+    {"value": "google/gemma-3n-E4B-it", "label": "Gemma 3N E4B"},
+    {"value": "Gryphe/MythoMax-L2-13b", "label": "MythoMax L2 13B"},
+    {"value": "mistralai/Mistral-7B-Instruct-v0.1", "label": "Mistral 7B v0.1"},
+    {"value": "mistralai/Mistral-7B-Instruct-v0.2", "label": "Mistral 7B v0.2"},
+    {"value": "mistralai/Mistral-7B-Instruct-v0.3", "label": "Mistral 7B v0.3"},
 ]
 
 # Title and description
@@ -155,15 +151,15 @@ with st.sidebar:
     st.divider()
     
     # Model selection
-    model_labels = ["Default (Meta Llama 3.1 70B Instruct Turbo)"] + [m["label"] for m in MODELS]
+    model_labels = ["Default (Llama 3.3 70B Turbo)"] + [m["label"] for m in MODELS]
     selected_model_label = st.selectbox(
         "Select Model",
         model_labels,
         help="Choose an AI model"
     )
     
-    if selected_model_label == "Default (Meta Llama 3.1 70B Instruct Turbo)":
-        selected_model = "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo"
+    if selected_model_label == "Default (Llama 3.3 70B Turbo)":
+        selected_model = "meta-llama/Llama-3.3-70B-Instruct-Turbo"
     else:
         selected_model = next(m["value"] for m in MODELS if m["label"] == selected_model_label)
     
@@ -239,8 +235,15 @@ if submit_button:
                     error_msg = response.json().get("error", {}).get("message", "Bad request")
                     st.markdown(f'<div class="error-box">❌ <strong>Bad Request:</strong> {error_msg}<br/>The model might not be recognized or the request format is invalid.</div>', unsafe_allow_html=True)
                 
+                elif response.status_code == 404:
+                    error_msg = response.json().get("error", {}).get("message", "Model not found")
+                    st.markdown(f'<div class="error-box">❌ <strong>Model Not Found:</strong> {error_msg}<br/>This model may not be available. Try using the default model.</div>', unsafe_allow_html=True)
+                
                 elif response.status_code == 429:
                     st.markdown('<div class="error-box">⏳ <strong>Rate Limit:</strong> You have exceeded the rate limit. Please try again later.</div>', unsafe_allow_html=True)
+                
+                elif response.status_code == 503:
+                    st.markdown('<div class="error-box">🔧 <strong>Service Unavailable:</strong> Together AI service is temporarily unavailable. Please try again in a moment.</div>', unsafe_allow_html=True)
                 
                 else:
                     error_msg = response.json().get("error", {}).get("message", "Unknown error")
@@ -258,9 +261,9 @@ if submit_button:
 # Footer
 st.divider()
 st.markdown("""
-    <div style='text-align: center; color: #666; padding: 1rem;'>
+    <div style='text-align: center; color: #94a3b8; padding: 1rem;'>
         <p>Powered by <strong>Together AI</strong> | Built with <strong>Streamlit</strong></p>
-        <p style='font-size: 0.8rem;'>Get your API key at <a href='https://api.together.xyz' target='_blank'>api.together.xyz</a></p>
+        <p style='font-size: 0.8rem;'>Get your API key at <a href='https://api.together.xyz' target='_blank' style='color: #8b5cf6;'>api.together.xyz</a></p>
     </div>
 """, unsafe_allow_html=True)
 
